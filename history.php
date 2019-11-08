@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+	require_once "Core/init.php";
+?>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,44 +32,50 @@
 		</div>
 	</nav>
 	<!-- end of navbar -->
+	<!-- history table -->
+	<h3 class="my-2">اختر تاريخاً للبحث</h3>
+	<form method="POST" action="history.php" class="mb-3">
+		<input name="date" type="date" class="w-100 text-center p-3">
+		<input type="submit" class="my-2 btn btn-primary main-btn" name="submit" value="البحث">
+	</form>
+	<?php
+		if(Input::get("date")) {
+			echo "<h3>".Input::get("date")." جميع الفواتير بتاريخ</h3><br>";
+		}
+	?>
 
-	<table style="width:100%">
+	
+	<table border="1px" style="width:100%">
 		<tr>
-			<th>التاريخ</th>
-			<th>المبلغ</th>
-			<th>الكمية</th>
-			<th>النوع</th>
-			<th>الوصف</th>
-			<th>النوع</th>
-			<th>اسم العميل</th>
+			<th class="p-2">الوقت</th>
+		    <th class="p-2">ملاحظات</th>
+		    <th class="p-2">المبلغ</th>
+		    <th class="p-2">الكمية</th>
+		    <th class="p-2">نوع الفاتورة</th>
+		    <th class="p-2">اسم العميل</th>
 		</tr>
-		<tr>
-		  <td>11/11/2019</td>
-		  <td>55</td>
-		  <td>2</td>
-		  <td>طباعة</td>
-		  <td></td>
-		  <td></td>
-		  <td>مصطفى قرع</td>
-		</tr>
-		<tr>
-			<td>11/11/2019</td>
-			<td>55</td>
-			<td>2</td>
-			<td>طباعة</td>
-			<td></td>
-			<td></td>
-			<td>مصطفى قرع</td>
-		</tr>
-		<tr>
-			<td>11/11/2019</td>
-			<td>55</td>
-			<td>2</td>
-			<td>طباعة</td>
-			<td></td>
-			<td></td>
-			<td>مصطفى قرع</td>
-		</tr>
+	<?php
+		$bill = new Bill();
+		$bills = $bill->getBills();
+		foreach($bills as $bill) {
+			//converting mysql date format to php date format
+			$phpdate = strtotime($bill->bill_date);
+			$date = date("Y-m-d", $phpdate);
+			if($date == Input::get("date")) {
+				echo "
+				<tr>
+					<td class='p-3'>".date("h:i A", $phpdate)."</td>
+					<td class='p-3'>{$bill->description}</td>
+					<td class='p-3'>{$bill->cash}</td>
+					<td class='p-3'>{$bill->quantity}</td>
+					<td class='p-3'>{$bill->bill_type}</td>
+					<td class='p-3'>{$bill->customer_name}</td>
+				</tr>
+			";
+			}
+			
+		}
+	?>
 	</table>
 </body>
 </html>

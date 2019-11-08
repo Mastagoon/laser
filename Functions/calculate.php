@@ -23,6 +23,9 @@
 			case "coordinate":
 				$pricing = Config::get("pricing/coordinate");
 				return !Empty($setprice) ? $quantity*$setprice : $quantity*$pricing;
+			case "other":
+				$pricing = Config::get("pricing/other");
+				return !Empty($setprice) ? $quantity*$setprice : $quantity*$pricing;
 			default:
 				return 0;
 		}

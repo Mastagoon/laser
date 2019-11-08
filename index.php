@@ -83,7 +83,7 @@
 		</div>
 		<!-- end of modal -->
 		<!-- display recent bills -->
-		<h3 class="text-center my-5">الأعمال الأخيرة</h3>
+		<h3 class="text-center my-5">فواتير اليوم</h3>
 		<table border="true" width="100%" id="recent-table">
 		    <tr>
 		      <th class="p-3">الوقت</th>
@@ -95,16 +95,19 @@
 			</tr>
 			<?php 
 				$bill = new Bill();
-				$bills = $bill->getBills();
+				$bills = $bill->getBills(1);
 				foreach($bills as $bill) {
+					$phpdate = strtotime($bill->bill_date);
+					$time = date("h:i A", $phpdate);
 					echo "
 						<tr>
-							<td class='p-3'>{$bill->bill_date}</td>
+							<td class='p-3'>".$time."</td>
 							<td class='p-3'>{$bill->description}</td>
 							<td class='p-3'>{$bill->cash}</td>
 							<td class='p-3'>{$bill->quantity}</td>
 							<td class='p-3'>{$bill->bill_type}</td>
 							<td class='p-3'>{$bill->customer_name}</td>
+						</tr>
 					";
 				}
 			?>

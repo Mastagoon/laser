@@ -5,3 +5,4 @@
 	}
 	$bill = new Bill();
 	$bill->setChecked();
+	Redirect::to("index.php");
