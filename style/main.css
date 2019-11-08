@@ -1,0 +1,76 @@
+#recent-table {
+	margin-top: 2px;
+}
+
+table tr:nth-child(even) {
+	background-color: #eee;
+} 
+table tr:nth-child(odd) {
+	background-color: #fff;
+}
+table th {
+	color: white;
+	background-color: black;
+}
+
+table tr {
+	text-align: center;
+}
+
+body {
+	background-color: #1E1E1E;
+}
+
+h1 {
+	text-align: center;
+	color: #fff;
+	margin-bottom: 170px;
+}
+
+form label {
+	display: block;
+	text-align: center;
+}
+
+form select, input[type=text], input[type="number"] {
+	display: block;
+	margin: auto;
+	padding: 5px 0;
+	width: 80%;
+	direction:RTL;
+}
+
+.btn:hover {
+	background-color: #1E1E1E;
+	color: #fff;
+}
+
+.main-btn {
+	text-align: center;
+	display: block;
+	margin: auto;
+}
+
+h3, h4 {
+	text-align: center;
+	color: #fff;
+}
+/* hiding the spinner on numerical inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+}
+
+
+#navbarSupportedContent {
+	float: right;
+}
+
+nav a {
+	font-size: 1.5rem;
+}
+nav {
+	display: flex !important;
+	justify-content: space-between;
+}
